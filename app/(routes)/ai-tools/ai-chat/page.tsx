@@ -1,10 +1,13 @@
+"use client"
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Send } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import EmptyState from './_components/EmptyState'
 
 function AiChat() {
+    const [userInput, setUserInput] = useState<string>('');
     return (
         <div className='px-10 md:px-24 lg:px-36 xl:px-48'>
             <div className='flex items-center justify-between gap-8'>
@@ -18,7 +21,7 @@ function AiChat() {
             <div className='flex flex-col h-[75vh]'>
                 <div className='mt-5'>
                     {/* empty state options */}
-                    <EmptyState/>
+                    <EmptyState selectedQuestion={(question: string)=> setUserInput(question)}/>
                 </div>
 
                 <div className='flex-1'>
@@ -27,7 +30,7 @@ function AiChat() {
 
                 <div className='flex items-center justify-between mt-2 gap-6'>
                     {/* input field */}
-                    <Input placeholder='Type your message here...' />
+                    <Input placeholder='Type your message here...' value={userInput} onChange={(event)=> setUserInput(event.target.value)} />
                     <Button><Send/></Button>
                 </div>
             </div>
